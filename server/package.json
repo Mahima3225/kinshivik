@@ -1,13 +1,13 @@
 {
-  "name": "kinshivik",
+  "name": "server",
   "version": "1.0.0",
-  "description": "A Blogging System",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Comrade Kaushik",
+  "author": "comrade kaushik",
   "license": "ISC",
+  "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
