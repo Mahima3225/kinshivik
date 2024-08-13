@@ -10,6 +10,25 @@ app.get('/data', (req, res) => {
   
 });
 
+app.get('/componenta', (req, res) => {
+  res.json({ message: 'componenta is here', status: 'success' })
+
+});
+
+
+app.get('/componentb', (req, res) => {
+  res.json({ message: 'componentb is here', status: 'success' })
+
+});
+
+
+app.get('/componentc', (req, res) => {
+  res.json({ message: 'componentc is here', status: 'success' })
+
+});
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
