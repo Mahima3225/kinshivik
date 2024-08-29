@@ -7,12 +7,15 @@ import { Route, Routes, Link } from "react-router-dom";
 
 
 import Login from './components/Login/Login';
-
+import LoginForm from './components/Login/LoginForm';
+import SignupForm from './components/Login/SignupForm';
+import Home from './components/home/Home';
 
 export default function App() {
   return (
-    // <>
 
+
+    // <>
     //   {/* <div>Hello</div>
     //   <Experimental props={{name: "Kingkaushik"}}/> */}
     //   <nav>
@@ -28,8 +31,6 @@ export default function App() {
     //       </li>
     //     </ul>
     //   </nav>
-
-      
     //   <Routes>
     //     <Route path="/componenta" element={<Componenta name="passed prop for a" />} />
     //     <Route path="/componentb" element={<Componentb name="passed prop for b" />} />
@@ -40,7 +41,27 @@ export default function App() {
 
     <>
 
-      <Login/>
+      
+
+      <Routes>
+
+        <Route path="/" element={< Home/>} />
+
+
+        <Route path="/login" element={<Login showLogin={1} />} />
+
+        <Route path="/signup" element={<Login showLogin={0} />} />
+
+
+        
+        
+         
+        
+         
+      </Routes>
+
+
+      
 
 
     

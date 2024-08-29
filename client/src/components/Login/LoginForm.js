@@ -1,20 +1,24 @@
-import React from 'react'
+import React from 'react';
+
 
 export default function LoginForm() {
   return (
-    <div>
+    <div id="login-form-container">
 
-        <form>
+        
 
-            <div>
-                <input type="text" placeholder='Email address or phone number'/>
+        <form id="login-form">
+
+            <div id="login-email-input-container">
+                <input id="login-email-input" type="text" placeholder='Email address or username'/>
             </div>
-            <div>
-                <input type="password" placeholder='Password'/>
+            <div id="login-password-input-container">
+                <input id="login-password-input" type="password" placeholder='Password'/>
             </div>
 
-            <div>
-                <input type='submit' placeholder='Login' />
+
+            <div id="login-submit-input-container">
+                <input id="login-submit-input" type='submit' placeholder='Login' />
             </div>
 
         </form>
