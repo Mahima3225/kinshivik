@@ -1,0 +1,17 @@
+#Category-Header-Main-Container{
+    position: fixed;
+    width: 82vw;
+    height: 7vh;
+    top: 10vh;
+    left: 18vw;
+    background-color: blueviolet;
+}
+
+#category-main-view-container{
+    margin-top: 17vh;
+    margin-left: 18vw;
+    background-color: beige;
+    width: 82vw;
+    height: 83vh;
+    overflow-y: auto;
+}

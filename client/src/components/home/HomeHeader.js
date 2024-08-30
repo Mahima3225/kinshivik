@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function HomeHeader() {
   return (
@@ -11,7 +11,13 @@ export default function HomeHeader() {
           </div>
         </div>
 
-        <div>
+        <div id="header-buttons-div-container">
+          <div id="header-compose-button">
+            <button>h</button>
+          </div>
+          <div id="header-profile-button">
+            <button>h</button>
+          </div>
           
         </div>
 

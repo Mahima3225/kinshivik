@@ -10,6 +10,8 @@ import Login from './components/Login/Login';
 import LoginForm from './components/Login/LoginForm';
 import SignupForm from './components/Login/SignupForm';
 import Home from './components/home/Home';
+import CategoryPrincipal from './components/categories/CategoryPrincipal';
+import AuthorTools from './components/authortable/AuthorTools';
 
 export default function App() {
   return (
@@ -51,6 +53,11 @@ export default function App() {
         <Route path="/login" element={<Login showLogin={1} />} />
 
         <Route path="/signup" element={<Login showLogin={0} />} />
+        <Route path="/category" element={<CategoryPrincipal/>}/>
+
+        <Route path="/author/compose" element={<AuthorTools/>}/>
+
+        <Route path="/author/myarticles" element={<AuthorTools/>}/>
 
 
         

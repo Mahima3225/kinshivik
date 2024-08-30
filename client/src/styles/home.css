@@ -5,6 +5,11 @@
     flex-direction: row;
     align-items: center;
     background-color: aliceblue;
+    background-color: aqua;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 
@@ -30,7 +35,7 @@
     top: 10vh;
     left: 0;
     bottom: 0;
-    width: 20vw;
+    width: 18vw;
 }
 #home-icon-sidebar{
     height: 20px;
@@ -47,4 +52,8 @@
 #library-icon-sidebar{
     height: 20px;
     width: 20px;
+}
+
+#HomeMain-container{
+    margin-left: 20vw;
 }

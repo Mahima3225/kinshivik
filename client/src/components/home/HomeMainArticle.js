@@ -12,7 +12,7 @@ export default function HomeMainArticle(props) {
             </div>
 
             <div>
-                {props.obj.headerdata.profilename}
+                {props.headerdata.profilename}
 
 
             </div>
@@ -20,7 +20,7 @@ export default function HomeMainArticle(props) {
         </div>
         <div id="home-main-arcticle-body">
             <div>
-                {props.obj.mainarticlemeta.articletitle}
+                {props.mainarticlemeta.articletitle}
 
             </div>
 
