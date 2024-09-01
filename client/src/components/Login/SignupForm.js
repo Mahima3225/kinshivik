@@ -70,6 +70,11 @@ export default function SignupForm() {
 
             </div>
 
+            <div id="signup-username-input-container">
+                    <input id="signup-username-input" type="text" placeholder='username' required></input>
+
+                </div>
+
             <div id="signup-birthdate-info-input-container">
                 <div id="signup-birth-date-input-container">
                     <select id="signup-birth-date-select">
@@ -107,9 +112,11 @@ export default function SignupForm() {
             <div id="signup-email-input-container">
                 <input id="login-email-input" type="text" placeholder='Email address or username'/>
             </div>
-            <div id="login-password-input-container">
+            <div id="signup-password-input-container">
                 <input id="login-password-input" type="password" placeholder='Password'/>
             </div>
+
+            
 
 
             <div id="login-submit-input-container">

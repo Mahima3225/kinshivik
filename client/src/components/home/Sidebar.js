@@ -10,9 +10,9 @@ export default function Sidebar() {
   return (
     <div id="home-sidebar-main-container">
 
-      <div>
-          <Link to="/Home">
-            <div>
+      <div id="home-icon-sidebar-link-container">
+          <Link to="/Home" id="home-icon-link">
+            <div id="home-icon-and-title-container">
               <div>
                 <img id="home-icon-sidebar" src={home}/>
               </div>
@@ -24,9 +24,9 @@ export default function Sidebar() {
       </div>
 
 
-      <div>
-        <Link to="/Subscriptions">
-          <div>
+      <div id="subscriptions-icon-sidebar-link-container">
+        <Link to="/Subscriptions" id="subscriptions-icon-link">
+          <div id = "subscriptions-icon-and-title-container">
             <div>
               <img id="subscriptions-icon-sidebar" src={subscriptions}/>
             </div>
@@ -39,9 +39,9 @@ export default function Sidebar() {
       
 
       
-      <div>
-        <Link to="/Category">
-          <div>
+      <div id="categories-icon-sidebar-link-container">
+        <Link to="/Category" id="categories-icon-link">
+          <div id = "categories-icon-and-title-container">
             <div>
               <img id="categories-icon-sidebar" src={categories}/>
             </div>
@@ -53,9 +53,9 @@ export default function Sidebar() {
       </div>
       
 
-     <div>
-        <Link to="/Library">
-          <div>
+     <div id="library-icon-sidebar-link-container">
+        <Link to="/Library" id="library-icon-link">
+          <div id = "library-icon-and-title-container">
             <div>
               <img id="library-icon-sidebar" src={library}/>
             </div>

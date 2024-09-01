@@ -1,17 +1,109 @@
 #Category-Header-Main-Container{
     position: fixed;
-    width: 82vw;
+    /* width: 82vw; */
     height: 7vh;
     top: 10vh;
-    left: 18vw;
-    background-color: blueviolet;
+    left: calc(18vw + 20px);
+    /* background-color: blueviolet; */
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: larger;
+    background-color: aliceblue;
+    width: calc(82vw - 20px);
+    border-left-style: solid ;
+    border-left-width:  4px;
+    border-left-color: rgb(127, 88, 255);
+
 }
 
 #category-main-view-container{
     margin-top: 17vh;
     margin-left: 18vw;
-    background-color: beige;
+    /* background-color: beige; */
     width: 82vw;
     height: 83vh;
     overflow-y: auto;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-right: 20px;
+    justify-content: space-between;
+    
+}
+.individual-category-main-container{
+    /* background-color: greenyellow; */
+    background-color: aliceblue;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: calc(50% - 20px);
+}
+.individual-category-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: blue; */
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+.individual-category-header-image-container{
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+
+}
+.individual-category-header-image{
+    max-width: 100%;
+    max-height: 100%;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 50%;
+
+}
+.individual-category-header-name-container{
+    font-size: large;
+
+}
+.individual-category-description-container{
+    /* background-color: aquamarine; */
+    padding-top: 10px;
+    /* min-height: 180px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left-style: solid;
+    border-left-color: rgb(127, 88, 255) ;
+    border-left-width: 4px;
+    display: -webkit-box;        /* Use WebKit's box model */
+    -webkit-box-orient: vertical; /* Set the box orientation to vertical */
+    -webkit-line-clamp: 5;       /* Show only 5 lines */
+    overflow: hidden;            /* Hide the overflowing text */
+    text-overflow: ellipsis; 
+    text-decoration: none;
+
+}
+.individual-category-visit-button-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 35px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    
+
+}
+.individual-category-visit-button{
+    background-color: rgb(251, 17, 99);
+    color: white;
+    font-weight: 600;
+    border-style: solid;
+    border-radius: 4px;
+    border-color: transparent;
+    height: 30px;
+    width: 60px;
+    cursor: pointer;
+
 }

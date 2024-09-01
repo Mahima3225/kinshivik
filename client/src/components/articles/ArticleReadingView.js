@@ -4,7 +4,7 @@ export default function ArticleReadingView() {
   return (
     <div id="article-reading-view-main-container">
         <div id="article-thumbnail-image-container">
-            <img/>
+            <img src={require('../../assets/il_570xN.5374292412_49r5.avif')}/>
         </div>
 
         <div id="article-content">
