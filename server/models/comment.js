@@ -1,7 +1,14 @@
-import mongoose from 'mongoose';
+
+
+const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
   {
+
+    userId: {
+      type: String,
+      required: true,
+    },
     content: {
       type: String,
       required: true,
@@ -10,14 +17,12 @@ const commentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userId: {
+    commentId:{
       type: String,
       required: true,
+
     },
-    likes: {
-      type: Array,
-      default: [],
-    },
+    
     numberOfLikes: {
       type: Number,
       default: 0,
@@ -27,5 +32,5 @@ const commentSchema = new mongoose.Schema(
 );
 
 const Comment = mongoose.model('Comment', commentSchema);
+module.exports = Comment;
 
-export default Comment;

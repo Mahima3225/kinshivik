@@ -40,7 +40,7 @@ export default function Sidebar() {
 
       
       <div id="categories-icon-sidebar-link-container">
-        <Link to="/Category" id="categories-icon-link">
+        <Link to="/Categories" id="categories-icon-link">
           <div id = "categories-icon-and-title-container">
             <div>
               <img id="categories-icon-sidebar" src={categories}/>

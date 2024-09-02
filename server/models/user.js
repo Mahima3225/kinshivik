@@ -1,5 +1,8 @@
-import mongoose from "mongoose";
+
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+const Subscriptions = require('./subscriptions')
 
 const userSchema = new Schema({
     firstname: {
@@ -8,12 +11,13 @@ const userSchema = new Schema({
     },
     lastname: {
       type: String,
-      required: true,
+      // required: true,
     },
 
-    username:{
+    userid:{
         type: String,
         required: true,
+        unique: true,
 
     },
     email: {
@@ -44,7 +48,12 @@ const userSchema = new Schema({
 
       // 0 for female --*-- 1 for male --*-- 2 for none
 
-    }
+    },
+    subscriptions : [Subscriptions.schema],
 });
+
+const User = mongoose.model('usersdata', userSchema);
+
+module.exports = User;
   
-export default mongoose.model("User", userSchema);
+ 

@@ -1,0 +1,133 @@
+#authortools-main-form-container{
+    margin-left: 18vw;
+    padding-top: 13.5vh;
+    display: flex;
+    justify-content: center;
+    /* background-color: black; */
+    width: 80.7vw;
+    
+
+
+}
+#authortools-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
+
+}
+
+
+#authortools-text-title-textarea-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+
+}
+#authortools-text-title-textarea-label{
+    margin-bottom: 5px;
+    font-size: 16px;
+
+}
+#authortools-text-title-textarea{
+    border-style: none;
+    border-bottom-style: solid;
+    resize: none;
+    border-bottom-color: rgb(127, 88, 255);
+    border-bottom-width: 2px;
+    min-height: 10vh;
+    /* height: fit-content; */
+    font-size: 16px;
+    letter-spacing: 0.4px;
+
+}
+
+#authortools-description-textarea-label{
+    margin-bottom: 5px;
+
+}
+    
+        
+#authortools-description-textarea-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+}
+#authortools-description-textarea{
+    border-style: none;
+    border-bottom-style: solid;
+    resize: none;
+
+    resize: none;
+    border-bottom-color: rgb(127, 88, 255);
+    border-bottom-width: 2px;
+    font-size: 16px;
+    min-height: 20vh;
+}
+          
+       
+
+#authortools-image-input-container{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    align-items: center;
+
+}
+#authortools-image-input-label{
+    margin-bottom: 5px;
+    margin-right: 10px;
+
+}
+#authortools-image-input{
+   
+}
+#express-your-thoughts{
+    margin-bottom: 5px;
+}
+           
+
+#authortools-content-textarea-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+}
+#authortools-content-textarea{
+    resize: none;
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(127, 88, 255);
+    border-bottom-width: 2px;
+    resize: none;
+    font-size: 16px;
+    min-height: 50vh;
+}
+            
+#authortools-submit-button-input-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+#authortools-submit-input{
+
+}
+textarea{
+    letter-spacing: 0.4px;
+}
+
+textarea:focus {
+    border-color: #66afe9;
+    border-color: rgb(127, 88, 255);
+    outline: none; /* Remove the default outline */
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.6); /* Add a subtle shadow */
+    font-size: 14px;
+  }

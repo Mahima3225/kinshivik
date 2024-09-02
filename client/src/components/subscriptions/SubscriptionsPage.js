@@ -11,6 +11,10 @@ export default function SubscriptionsPage() {
 
 
     <div id="subscriptions-page-main-container">
+      <div id="Category-Header-Main-Container">
+        
+        Subscriptions
+      </div>
 
 
       <HomeHeader/>

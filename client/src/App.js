@@ -13,6 +13,7 @@ import Home from './components/home/Home';
 import CategoryPrincipal from './components/categories/CategoryPrincipal';
 import AuthorTools from './components/authortable/AuthorTools';
 import SubscriptionsPage from './components/subscriptions/SubscriptionsPage';
+import Library from './components/library/Library';
 
 export default function App() {
   return (
@@ -55,15 +56,17 @@ export default function App() {
         <Route path="/login" element={<Login showLogin={1} />} />
 
         <Route path="/signup" element={<Login showLogin={0} />} />
-        <Route path="/category" element={<CategoryPrincipal/>}/>
+        <Route path="/categories" element={<CategoryPrincipal/>}/>
         
         {/* <Route path="/category/:id" element={< />} /> */}
 
         <Route path="/subscriptions" element={<SubscriptionsPage/>}/>
+        <Route path="/library" element={<Library/>}/>
         <Route path="/profile/:id" element={<SubscriptionsPage/>}/>
         <Route path="/author/compose" element={<AuthorTools/>}/>
 
         <Route path="/author/myarticles" element={<AuthorTools/>}/>
+        <Route path="/myprofile" element={<AuthorTools/>}/>
 
         
 

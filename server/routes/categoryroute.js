@@ -4,7 +4,7 @@ import { verifyToken } from '../utils/verifyUser.js';
 const router = express.Router();
 
 
-router.get('/getposts', getposts);
+router.get('/category/:categoryid/getposts', getposts);
 
 
 
