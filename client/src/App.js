@@ -15,6 +15,7 @@ import AuthorTools from './components/authortable/AuthorTools';
 import SubscriptionsPage from './components/subscriptions/SubscriptionsPage';
 import Library from './components/library/Library';
 import NewArticleView from './components/articles/NewArticleView';
+import ArticleRead from './components/articles/ArticleRead';
 
 export default function App() {
   return (
@@ -68,6 +69,9 @@ export default function App() {
 
         <Route path="/author/myarticles" element={<AuthorTools/>}/>
         <Route path="/myprofile" element={<AuthorTools/>}/>
+
+
+        <Route path="/post/:id" element={<ArticleRead/>}/>
 
         <Route path='/newview' element={<NewArticleView/>}/>
 

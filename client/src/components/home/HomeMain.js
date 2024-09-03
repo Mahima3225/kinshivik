@@ -6,22 +6,22 @@ export default function HomeMain() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch('/api/post/getPosts');
+      const res = await fetch('http://localhost:9090/posts');
       const data = await res.json();
-      setPosts(data.posts);
+      setPosts(data);
     };
     fetchPosts();
   }, []);
   return (
     <div id="homemain-container">
       {posts.map((post) => (
-                <HomeMainArticle key={post._id} post={post} />
+                <HomeMainArticle key = {post._id} props={post} />
       ))}
 
 
-      <HomeMainArticle {...array1[0]}/>
+      {/* <HomeMainArticle {...array1[0]}/> */}
 
-      <HomeMainArticle {...array1[0]}/>
+      {/* <HomeMainArticle {...array1[0]}/> */}
 
 
 

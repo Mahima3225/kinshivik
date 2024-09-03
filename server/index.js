@@ -460,6 +460,65 @@ app.get("/posts", async (req, res) => {
 });
 
 
+// app.get('/post/:id',async(req,res)=>{
+
+//     const id = req.params.id;
+    
+
+//     Post.findOne({ postId: id }, (err, post) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).send("Error fetching post");
+//         }
+//         if (!post) {
+//             return res.status(404).send("Post not found");
+//         }
+//         res.send(post.toObject());
+//     });
+
+// })
+
+app.get('/post/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const post = await Post.findOne({ postId: id });
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+
+
+
+
+        const postObj = post.toObject();
+
+
+
+
+            postObj.imageUrl = await getSignedUrl(
+                s3Client,
+                new GetObjectCommand({
+                    Bucket: bucketName,
+                    Key: post.image
+                }),
+                { expiresIn: 900 } // 900 seconds
+            );
+            console.log(postObj.imageUrl);
+           
+
+
+
+
+
+
+        res.send(postObj);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error fetching post");
+    }
+});
+
+
 
 app.post("/categories/add/:category",async(req,res)=>{
     const data = [
