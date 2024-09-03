@@ -1,0 +1,336 @@
+#signup-form-container{
+    width: 100%;
+    /* background-color: blueviolet; */
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+
+
+}
+#signup-form-signin-title{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    /* background-color: beige; */
+    font-size: larger;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(127, 88, 255);
+    letter-spacing: 0.5px;
+    
+    /* background-color: brown; */
+    
+}
+#signup-form{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: bisque; */
+    align-items: center;
+    justify-content: center;
+
+}
+
+#signup-last-and-first-name-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+    
+    /* background-color: green; */
+
+}
+#signup-first-name-input-container{
+    width: 32%;
+    display: flex;
+    justify-content: end;
+    margin-right: 15px;
+
+}
+#signup-first-name-input{
+    width: 80%;
+    height: 35px;
+    background-color: rgb(245, 246, 247);
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 1px;
+    /* border-style: solid; */
+    /* border-width: 1px; */
+
+}
+    /* background-color: aliceblue; */
+    
+
+
+#signup-first-name-input:focus{
+    background-color: aliceblue;
+    border-color: rgb(127, 88, 255);
+    border-color: rgb(127, 88, 255);
+    outline: none;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    
+    
+
+}
+
+
+#signup-last-name-input-container{
+    width: 32%;
+    display: flex;
+    justify-content: start;
+}
+#signup-last-name-input{
+    width: 80%;
+    height: 35px;
+    background-color: rgb(245, 246, 247);
+    background-color: rgb(245, 246, 247);
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 1px;
+    /* background-color: aliceblue; */
+
+}
+#signup-last-name-input:focus{
+    
+    background-color: aliceblue;
+    background-color: aliceblue;
+    border-color: rgb(127, 88, 255);
+    border-color: rgb(127, 88, 255);
+    outline: none;
+    border-style: solid;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+
+}
+#username-title{
+    width: calc(51.2% + 15px);
+    padding-left: 5px;
+    display: flex;
+    height: 35px;
+    justify-content: left;
+    align-items: center;
+    border-left-style: solid;
+    border-left-width:3px;
+    border-left-color: rgb(127, 88, 255);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px ;
+    font-size: 14px;
+    font-weight: 450;
+}
+
+
+#signup-username-input-container{
+    width: calc(51.2% + 15px);
+    margin-top: 5px;
+    
+
+}
+#signup-username-input{
+    width: 100%;
+    height: 35px;
+    background-color: rgb(245, 246, 247);
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 1px;
+    /* background-color: aliceblue; */
+
+}
+#signup-username-input:focus{
+    
+    background-color: aliceblue;
+    background-color: aliceblue;
+    border-color: rgb(127, 88, 255);
+    border-color: rgb(127, 88, 255);
+    outline: none;
+    border-style: solid;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+
+}
+#signup-email-input-container{
+    width: calc(51.2% + 15px);
+    margin-top: 10px;
+
+}
+#signup-email-input{
+    width: 100%;
+    height: 35px;
+    background-color: rgb(245, 246, 247);
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 1px;
+    /* background-color: aliceblue; */
+
+}
+#signup-email-input:focus{
+    
+    background-color: aliceblue;
+    background-color: aliceblue;
+    border-color: rgb(127, 88, 255);
+    border-color: rgb(127, 88, 255);
+    outline: none;
+    border-style: solid;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+
+}
+#birthdate-info-title{
+    width: calc(51.2% + 15px);
+    /* padding-left: 5px; */
+    display: flex;
+    height: 35px;
+    justify-content: left;
+    align-items: center;
+    width: calc(51.2% + 15px);
+    padding-left: 5px;
+    display: flex;
+    height: 35px;
+    justify-content: left;
+    align-items: center;
+    border-left-style: solid;
+    border-left-width:3px;
+    border-left-color: rgb(127, 88, 255);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px ;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 450;
+}
+#signup-birthdate-info-input-container{
+    width: calc(51.2% + 15px);
+    /* margin-top: 10px; */
+    /* background-color: blue; */
+
+
+}
+
+#signup-birth-date-select{
+    width: 32%;
+    margin-right: 2%;
+    height: 35px;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: gray;
+    /* background-color: rgb(224, 221, 221); */
+    /* background-color: aliceblue; */
+
+
+}
+#signup-birth-month-select{
+    width: 32%;
+    margin-right: 2%;
+    height: 35px;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: gray;
+
+}
+#signup-birth-year-select{
+    width: 32%;
+    height: 35px;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: gray;
+    /* background-color: aliceblue; */
+    
+
+}
+
+#signup-birth-date-select:focus{
+   
+    background-color: aliceblue;
+    border-color: rgb(127, 88, 255);
+    outline: none;
+    
+    
+
+
+}
+#signup-birth-month-select:focus{
+    
+    background-color: aliceblue;
+    border-color: rgb(127, 88, 255);
+    outline: none;
+
+}
+#signup-birth-year-select:focus{
+    
+    background-color: aliceblue;
+    border-color: rgb(127, 88, 255);
+    outline: none;
+    
+
+}
+
+#signup-password-input-container{
+    width: calc(51.2% + 15px);
+    margin-top: 10px;
+
+}
+#signup-password-input{
+    width: 100%;
+    height: 35px;
+    background-color: rgb(245, 246, 247);
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 1px;
+    /* background-color: aliceblue; */
+
+}
+#signup-password-input:focus{
+    width: 100%;
+    height: 35px;
+    border-color: rgb(127, 88, 255);
+    outline: none;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    /* background-color: aliceblue; */
+
+}
+#signup-submit-input-container{
+    margin-top: 10px;
+
+}
+#signup-submit-input{
+    height: 30px;
+    width: fit-content;
+    min-width: 70px;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+    background-color: rgb(226, 7, 83);
+    border-style: solid;
+    border-radius: 3px;
+    border-color: transparent;
+    cursor: pointer;
+
+
+}
+
+

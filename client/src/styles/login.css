@@ -45,13 +45,29 @@
 #login-form-container{
     width: 100%;
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
+    flex-direction: column;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    margin-top: 10px;
+    /* background-color: azure; */
 
 }
+#login-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    /* background-color: beige; */
+    font-size: larger;
+    /* border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(127, 88, 255); */
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
 #login-form{
-    background-color: black;
+    /* background-color: black; */
     width: 40%;
     min-height: 300px;
     height: 80vh;
@@ -60,5 +76,144 @@
     /* justify-content: center; */
     align-items: center;
     padding-top: 30px;
+    /* background-color: aliceblue; */
+   
+    border-style: solid;
+    /* border-color: rgb(127, 88, 255); */
+    border-color: rgb(88, 127, 255);
+    border-width: 2px;
+    border-radius: 7px;
 
+}
+input:focus{
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    
+}
+#login-email-title{
+    width: calc(51.2% + 15px);
+    padding-left: 5px;
+    display: flex;
+    height: 25px;
+    justify-content: left;
+    align-items: center;
+    border-left-style: solid;
+    border-left-width:3px;
+    /* border-left-color: rgb(127, 88, 255); */
+    border-left-color: rgb(226, 7, 83);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px ;
+    font-size: 14px;
+    font-weight: 450;
+    /* background-color: aquamarine; */
+    /* background-color: rgb(59, 219, 86); */
+    background-color: rgb(88, 127, 255) ;
+    color: white;
+    margin-bottom: 10px;
+}
+#login-email-input-container{
+    /* background-color: brown; */
+    width: calc(51.2% + 15px);
+}
+
+#login-email-input{
+    width: 100%;
+    height: 35px;
+    background-color: rgb(245, 246, 247);
+    border-style: solid;
+    border-width: 1px;
+    /* border-color: gray; */
+    border-radius: 2px;
+    /* border-style: solid; */
+    /* border-width: 1px; */
+
+}
+    /* background-color: aliceblue; */
+    
+
+
+#login-email-input:focus{
+    background-color: aliceblue;
+    /* border-color: rgb(127, 88, 255); */
+    border-color: rgb(88, 127, 255);
+    
+    outline: none;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+
+    
+    
+
+}
+
+
+#login-password-title{
+    width: calc(51.2% + 15px);
+    padding-left: 5px;
+    display: flex;
+    height: 25px;
+    justify-content: left;
+    align-items: center;
+    border-left-style: solid;
+    border-left-width:3px;
+    /* border-left-color: rgb(127, 88, 255); */
+    border-left-color: rgb(226, 7, 83);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px ;
+    font-size: 14px;
+    font-weight: 450;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    background-color: rgb(88, 127, 255) ;
+    color: white;
+    /* background-color: rgb(8, 152, 241); */
+}
+#login-password-input-container{
+    width: calc(51.2% + 15px);
+    margin-bottom: 20px;
+    
+
+}
+#login-password-input{
+    width: 100%;
+  
+    height: 35px;
+    /* background-color: rgb(245, 246, 247); */
+    background-color: aliceblue;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 1px;
+    
+
+}
+#login-password-input:focus{
+    background-color: aliceblue;
+    
+    border-color: rgb(88, 127, 255);
+    
+    outline: none;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    
+    
+
+}
+
+#login-submit-input{
+    height: 30px;
+    width: fit-content;
+    min-width: 70px;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+    background-color: rgb(226, 7, 83);
+    border-style: solid;
+    border-radius: 3px;
+    border-color: transparent;
+    cursor: pointer;
 }

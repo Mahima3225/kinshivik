@@ -1,6 +1,22 @@
+const multer = require("multer");
+const sharp = require("sharp");
+const { S3Client, PutObjectCommand }= require("@aws-sdk/client-s3");
+
+const { GetObjectCommand , DeleteObjectCommand} = require("@aws-sdk/client-s3");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const dotenv = require("dotenv");
+
+
+
+
+
+
+
 const express = require('express');
 
 const mongoose = require("mongoose");
+const bcryptjs = require('bcryptjs');
+const crypto = require('crypto');
 const app = express();
 const cors = require("cors");
 // import User from './models/user';
@@ -8,14 +24,51 @@ const User = require('./models/user');
 const Post = require('./models/articlepost');
 const Comment = require('./models/comment');
 const Category = require("./models/categories");
-const port = 8080;
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const slugify = require('slugify');
+const port = 9090;
 const host = 'http://127.0.0.1:' + port;
+
+
+
+
+
+
+
+
+
+dotenv.config();
 
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-
 app.use(cors());
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+const bucketName = process.env.BUCKET_NAME;
+const region = process.env.BUCKET_REGION;
+const accessKeyId = process.env.ACCESS_KEY;
+const secretAccessKey = process.env.SECRET_ACCESS_KEY;
+
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+const s3Client = new S3Client({
+  region,
+  credentials: {
+    accessKeyId,
+    secretAccessKey
+  }
+})
+
+
+
+
 
 const mongodbURL = 'mongodb://127.0.0.1:27017/kinshivik';
 
@@ -31,66 +84,165 @@ async function main() {
 
 main();
 
+
+
+
+
+
+
 app.get("/",async(req,res,next)=>{
     res.send("hi");
 
 });
 
+app.post("/login",async(req,res,next)=>{
+    
+    const user = await User.findOne({ email: req.body.email.toLowerCase()});
+
+    if (user) {
+        // console.log('User found:', user);
+        if(user.password === req.body.password){
+
+            const randomString = crypto.randomBytes(32).toString('hex');
+
+
+
+            res.cookie("accesskey",randomString);
+            res.cookie('userid',user.userid);
+            console.log(user.userid);
+
+            await User.findOneAndUpdate(
+                { email: req.body.email.toLowerCase() },
+                { $set: {accesskey : randomString} },
+                { new: true }
+            );
+
+
+            
+            res.json({isValid : 'true',userfound : 'false'})
+        }
+        else {
+            res.json({ isValid: 'false' });
+        }
+        
+    } 
+    else{
+        res.json({isValid : 'false',userfound : 'false'});
+        
+    }
+    // console.log(req.body);
+    // console.log(req.body.email);
+    // console.log(req.body.password);
+
+
+    // res.json(req.body);
+
+
+
+
+
+});
+
+
+app.get('/testauth',async (req,res)=>{
+    // const user = await User.findOne({ userid: req.cookies.userid.toLowerCase()});
+
+    const userId = req.cookies.userid;
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID cookie is missing' });
+    }
+
+    const user = await User.findOne({ userid: userId.toLowerCase() });
+
+
+    if(req.cookies.accesskey === user.accesskey){
+        res.send("you are good");
+
+    }
+    else{
+        res.send("unauthorized");
+    }
+
+});
+
+
+app.get('/mycook',(req,res)=>{
+    console.log(req.cookies);
+    res.send("Hello")
+});
+
+
 app.post("/users/add", async(req,res)=>{
-    const data = [
-    {
+    // const data = [
+    // {
         
-        "firstname": "Bella ",
-        "lastname" :"Gandsin" ,
-        "userid" : "14a",
-        "email" : "belgan9@yahoo.com",
-        "password" :"abcd123" ,
-        "birthDate" :30 ,
-        "birthMonth" :12 ,
-        "birthYear" : 2005,
-        "gender" : 0,
-        "subscriptions": [
-            {
-                "userid" : "6a",
-                "firstname": "Jake",
-                "lastname": "Jester",
-            },
-            {
-                "userid": '5a',
-                "firstname": 'Apurva',
-                "lastname": 'Kaushik',
+    //     "firstname": "Bella ",
+    //     "lastname" :"Gandsin" ,
+    //     "userid" : "14a",
+    //     "email" : "belgan9@yahoo.com",
+    //     "password" :"abcd123" ,
+    //     "birthDate" :30 ,
+    //     "birthMonth" :12 ,
+    //     "birthYear" : 2005,
+    //     "gender" : 0,
+    //     "subscriptions": [
+    //         {
+    //             "userid" : "6a",
+    //             "firstname": "Jake",
+    //             "lastname": "Jester",
+    //         },
+    //         {
+    //             "userid": '5a',
+    //             "firstname": 'Apurva',
+    //             "lastname": 'Kaushik',
                 
-            },
-        ],
+    //         },
+    //     ],
 
         
 
-    },
-    {
+    // },
+    // {
         
-        "firstname": "Chelsea Marquez",
-        "lastname" :"Keely" ,
-        "userid" : "15a",
-        "email" : "Chelsea35@google.com",
-        "password" :"willchelsed123" ,
-        "birthDate" :11 ,
-        "birthMonth" :7 ,
-        "birthYear" : 1997,
-        "gender" : 0,
+    //     "firstname": "Chelsea Marquez",
+    //     "lastname" :"Keely" ,
+    //     "userid" : "15a",
+    //     "email" : "Chelsea35@google.com",
+    //     "password" :"willchelsed123" ,
+    //     "birthDate" :11 ,
+    //     "birthMonth" :7 ,
+    //     "birthYear" : 1997,
+    //     "gender" : 0,
 
         
 
-    },
+    // },
     
     
 
 
-    ];
+    // ];
+    console.log(req.body.username);
+    const data = [
+       {
+
+        "firstname": req.body.firstname,
+        "lastname" :req.body.lastname ,
+        "userid" :req.body.userid,
+        "email" : req.body.email,
+        "password" :req.body.password ,
+        "birthDate" :req.body.birthDate,
+        "birthMonth" :req.body.birthMonth ,
+        "birthYear" : req.body.birthYear,
+       } ,
+        
+    ]
 
 
     try {
         const result = await User.insertMany(data);
-        res.send(result);
+        res.json({registered : 'true'})
+        // res.send(result);
     } catch (err) {
         console.error(err);
         res.status(500).send("Error inserting users");
@@ -146,76 +298,167 @@ app.post("/post/comment",async(req,res)=>{
 });
 
 
-
-app.post("/article/create",async(req,res)=>{
-    const data = [
-        {
-            "postId": "post3a" ,
-            "userId": "5a",
-            "title": "‘British Bill Gates’ and Morgan Stanley chairman missing after yacht sinking",
-            "description":"Tech entrepreneur Mike Lynch and his friend, investment banker Jonathan Bloomer, are among six people unaccounted for after a tornado hit their vessel near Sicily" ,
-
-
-            "content":"British tech entrepreneur Mike Lynch and Morgan Stanley International chairman Jonathan Bloomer have been reported missing after their superyacht sank off the coast of Sicily on Monday, according to media reports.The Guardian reported, citing the head of Sicily’s civil protection agency, that Bloomer, Lynch, his 18-year-old daughter Hannah, and lawyer Chris Morvillo are among the six people still unaccounted for as of late Monday. The yacht they were traveling on, a British-flagged, 56-meter sailboat called the‘Bayesian’, was carrying a total of 22 people – 12 crew members and ten passengers – at the time of the incident and was anchored off the port of Porticello. According to the Italian Coast Guard, the vessel was hit by a waterspout – a type of tornado that forms over water — in the early hours of Monday morning. So far, one man, understood to be the ship’s chef, has been confirmed dead. Fifteen people have been rescued, including Lynch’s wife Angela Bacares, who owns the yacht, and a one-year-old girl who was saved by her mother.  ",
-            "category":"UK" ,
-            "slug": "post3a-Morgan-Stanley-chairman-missing-after-yacht-sinking",
-        },
-        {
-            "postId": "post4a" ,
-            "userId": "11a",
-            "title": "Work begins on German military base near Russian border",
-            "description":"Lithuania has an agreement in place with its NATO ally whereby Berlin will deploy 4,800 troops and various weapons systems to the Baltic state" ,
-
-            "content":"Lithuania has begun building a military base between Russia’s Kaliningrad and Belarus, the Defense Ministry in Vilnius has announced. When completed, the facility will house a contingent of German troops, some 20km (12 miles) from the Belarusian border, close to the Russian exclave of Kaliningrad.The two NATO member states sealed the agreement to build the base in December 2023, during a meeting between German Defense Minister Boris Pistorius and his Lithuanian counterpart at the time, Arvydas Anusauskas. The plan envisages the first permanent deployment of German troops on foreign soil since the end of World War II.The garrison is expected to reach its projected strength of 4,800 combat-ready troops and 200 civilian specialists, complete with heavy armaments and support infrastructure, by the end of 2027. Called the heavy 42nd Armored Brigade, the unit will comprise three combat battalions. Two of them will be German-only, and include an armored battalion and a heavy infantry battalion. The other will be multinational.Speaking at the time, Pistorius characterized the future deployment as a way for his nation to “assume leadership responsibility” within NATO.EU state testing bunker designsREAD MORE: EU state testing bunker designs . In a post on X on Monday, the Lithuanian Defense Ministry wrote that the country had “just launched its largest-ever military project at Rudninkai, building a base to house 80% of the German brigade.”",
-
-
-            "category":"Geo-Politics" ,
-            "slug": "post4a-work-begins-on-german-military-base-near-russian-border",
-
-            "comments" : [
-                {
-                    "postId": "post3a" ,
-                    "userId": "7a",
-                    "commentId" :"3c",
-                    
-        
-        
-                    "content":"Good read.",
-                    "numberOfLikes" : 3,
-                },
-                {
-                    "postId": "post4a" ,
-                    "userId": "3a",
-                    "commentId" :"4c",
-        
-                    
-                    "content":"Nice Article",
-        
-        
-                    "numberOfLikes" : 5,
-                    
-                },
-            ],
-        },
-    
-        
-        
-    
-    
-
-
-    ];
-
-
+app.get("/article/get/:slug",async(req,res)=>{
     try {
-        const result = await Post.insertMany(data);
-        res.send(result);
+        const article = await Post.findOne({ slug: req.params.slug });
+        if (article) {
+            res.send(article);
+          
+        } else {
+          console.log('No article found with the given slug.');
+        }
+      } catch (error) {
+        console.error('Error finding article:', error);
+      }
+})
+
+
+
+
+// const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
+// app.post("/article/create",upload.single('image'),async(req,res)=>{
+    
+//     const file = req.file;
+//     const title = req.body.title;
+//     const description = req.body.description;
+//     const content = req.body.content;
+
+
+//     const fileBuffer = file.buffer;
+  
+//     const fileName = `${title}-${generateFileName()}`;
+//     const postid = `postpost${generateFileName()}`;
+  
+//     const uploadParams = {
+//         Bucket: bucketName,
+//         Body: fileBuffer,
+//         Key: fileName,
+//         ContentType: file.mimetype
+//     };
+
+
+//     // Send the upload to S3
+//     await s3Client.send(new PutObjectCommand(uploadParams));
+  
+    
+
+
+//     try {
+//         const post = await Post.insertMany([{
+//             image: fileName,
+//             title: title,
+//             description: description,
+//             content: content,
+//             postId : postid,
+//         },]);
+//         // const result = await Post.insertMany(data);
+//         res.send(post);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send("Error inserting posts");
+//     }
+    
+// })
+
+
+
+app.post("/article/create", upload.single('image'), async (req, res) => {
+
+    const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
+    try {
+        const file = req.file;
+        if (!file) {
+            return res.status(400).send("No file uploaded");
+        }
+
+        const title = req.body.title;
+        const description = req.body.description;
+        const content = req.body.content;
+
+
+
+
+        const slug = slugify(title, { lower: true, strict: true });
+        if (!slug) {
+            return res.status(400).send("Slug cannot be null");
+        }
+
+        const existingPost = await Post.findOne({ slug });
+        if (existingPost) {
+            slug = `${slug}${generateFileName()}`
+            // return res.status(400).send("Slug already exists");
+        }
+
+
+
+
+
+        const fileBuffer = file.buffer;
+        const fileName = `${title}-${generateFileName()}`;
+        const postid = `post${generateFileName()}`;
+
+        const uploadParams = {
+            Bucket: bucketName,
+            Body: fileBuffer,
+            Key: fileName,
+            ContentType: file.mimetype
+        };
+
+        await s3Client.send(new PutObjectCommand(uploadParams));
+
+        const post = await Post.insertMany([{
+            image: fileName,
+            title: title,
+            description: description,
+            content: content,
+            postId: postid,
+            slug: slug,
+        }]);
+
+        res.send(post);
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error inserting users");
+        res.status(500).send("Error inserting posts");
     }
-    
-})
+});
+
+
+
+
+
+
+app.get("/posts", async (req, res) => {
+    try {
+        const posts = await Post.find().sort({ created: -1 });
+
+        // Generate signed URLs in parallel
+        const postsWithUrls = await Promise.all(posts.map(async (post) => {
+
+            const postObj = post.toObject();
+
+
+
+
+            postObj.imageUrl = await getSignedUrl(
+                s3Client,
+                new GetObjectCommand({
+                    Bucket: bucketName,
+                    Key: post.image
+                }),
+                { expiresIn: 900 } // 900 seconds
+            );
+            console.log(postObj.imageUrl);
+            return postObj;
+        }));
+        console.log(`Here are the postswithurls ---------*----------- ${postsWithUrls}`);
+
+        res.send(postsWithUrls);
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        res.status(500).send({ error: 'Error fetching posts' });
+    }
+});
+
 
 
 app.post("/categories/add/:category",async(req,res)=>{

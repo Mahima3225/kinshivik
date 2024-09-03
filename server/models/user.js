@@ -7,26 +7,31 @@ const Subscriptions = require('./subscriptions')
 const userSchema = new Schema({
     firstname: {
       type: String,
+      trim: true,
       required: true,
     },
     lastname: {
       type: String,
+      trim: true,
       // required: true,
     },
 
     userid:{
         type: String,
+        trim: true,
         required: true,
         unique: true,
 
     },
     email: {
       type: String,
+      trim: true,
       required: true,
       unique: true,
     },
     password: {
       type: String,
+      trim: true,
       required: true,
       minLength: 6,
     },
@@ -50,6 +55,11 @@ const userSchema = new Schema({
 
     },
     subscriptions : [Subscriptions.schema],
+    accesskey: {
+      type: String,
+      trim: true,
+      default: 'axrtre5razf8ytt5tud9chcg',
+    },
 });
 
 const User = mongoose.model('usersdata', userSchema);

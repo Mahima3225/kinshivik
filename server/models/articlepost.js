@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema(
     },
     userId: {
       type: String,
-      required: true,
+      // required: true,
     },
     
     title: {
@@ -22,7 +22,7 @@ const postSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true
+      // required: true
     },
     content: {
       type: String,
@@ -39,7 +39,7 @@ const postSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
     },
     comments : [Comment.schema],
