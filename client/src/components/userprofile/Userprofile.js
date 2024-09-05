@@ -1,10 +1,10 @@
-import React , { useEffect , useState} from 'react';
+import React from 'react';
+import  { useEffect , useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import '../../styles/signup.css';
-export default function SignupForm() {
 
-    // const navigate = useNavigate(); 
+export default function Userprofile() {
+
     const navigate = useNavigate(); 
 
     const [firstname, setFirstname] = useState('');
@@ -102,87 +102,12 @@ export default function SignupForm() {
           }
 
     };
+  return(
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function createDynamicDateOptionElement() {
-
-        for(let i = 1;i<=31;i++){
-            const newOption = document.createElement('option');
-            newOption.textContent = i;
-            newOption.value = i;
-
-            const selectdateelement = document.getElementById("signup-birth-date-select");
-            selectdateelement.appendChild(newOption);
-            
-
-
-
-
-        }
-        
-        
-    }
-    function createDynamicYearOptionElement() {
-
-        for(let i = 2024;i>=1924;i--){
-            const newOption2 = document.createElement('option');
-            newOption2.textContent = i;
-            newOption2.value = i;
-
-            const selectyearelement = document.getElementById("signup-birth-year-select");
-            selectyearelement.appendChild(newOption2);
-            
-
-
-
-
-        }
-        
-        
-    }
-
-
-    // createDynamicDateOptionElement();
-    // createDynamicYearOptionElement();
-
-
-    useEffect(() => {
-        console.log("useEffect ran!");
-        createDynamicDateOptionElement();
-        createDynamicYearOptionElement();
-        
-      }, []);
-    
-      console.log("Component rendered!");
-  return (
+<>
     <div id="signup-form-container" >
         <div id="signup-form-signin-title">
-        Signup
+        Userprofile
         </div>
 
 
@@ -269,5 +194,6 @@ export default function SignupForm() {
 
 
     </div>
+    </>
   )
 }

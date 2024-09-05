@@ -109,6 +109,7 @@ app.post("/login",async(req,res,next)=>{
 
             res.cookie("accesskey",randomString);
             res.cookie('userid',user.userid);
+            
             console.log(user.userid);
 
             await User.findOneAndUpdate(
@@ -119,7 +120,7 @@ app.post("/login",async(req,res,next)=>{
 
 
             
-            res.json({isValid : 'true',userfound : 'false'})
+            res.json({isValid : 'true',userfound : 'false',})
         }
         else {
             res.json({ isValid: 'false' });
@@ -253,6 +254,49 @@ app.post("/users/add", async(req,res)=>{
 
 
 
+app.post("/user/update", async (req, res) => {
+    try {
+        const idrequested = req.body._id;
+
+        const updates = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            userid: req.body.userid,
+            email: req.body.email,
+            password: req.body.password
+        };
+
+        const bulkOps = [{
+            updateOne: {
+                filter: { _id: idrequested },
+                update: { $set: updates }
+            }
+        }];
+
+        const response = await User.bulkWrite(bulkOps)
+            .then(result => {
+                console.log('Bulk update successful:', result);
+                res.json({ registered: 'true' });
+            })
+            .catch(err => {
+                console.error('Bulk update error:', err);
+                res.status(500).send("Error updating user");
+            }
+        );
+
+        console.log(response);
+
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating user");
+    }
+});
+
+
+
+
+
 app.post("/post/comment",async(req,res)=>{
     const data = [
         {
@@ -311,6 +355,67 @@ app.get("/article/get/:slug",async(req,res)=>{
         console.error('Error finding article:', error);
       }
 })
+
+
+
+
+app.get('/categories',async(req,res)=>{
+    try {
+        const categories = await Category.find({});
+        res.json(categories);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error fetching Categories');
+    }
+
+});
+
+app.get('/category/:categoryId/posts', async (req, res) => {
+    const categoryId = req.params.categoryId;
+
+    try {
+        // const categories = await Category.find({ categoryId: categoryId },{posts:true});
+        // // res.json(categories);
+        // const articles = await Post.find({ postId: { $in: categories.posts} });
+        // res.send(articles);
+
+        const categories = await Category.find({ categoryId: categoryId }, { posts: 1 });
+
+        
+        const postIds = categories.flatMap(category => category.posts);
+
+        
+        const articles = await Post.find({ postId: { $in: postIds } });
+
+        const postsWithUrls = await Promise.all(articles.map(async (post) => {
+
+            const postObj = post.toObject();
+
+
+
+
+            postObj.imageUrl = await getSignedUrl(
+                s3Client,
+                new GetObjectCommand({
+                    Bucket: bucketName,
+                    Key: post.image
+                }),
+                { expiresIn: 900 } // 900 seconds
+            );
+            // console.log(postObj.imageUrl);
+            return postObj;
+        }));
+        // console.log(`Here are the postswithurls ---------*----------- ${postsWithUrls}`);
+
+        res.send(postsWithUrls);
+
+        // res.send(articles);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error fetching categories');
+    }
+});
+
 
 
 
@@ -447,10 +552,10 @@ app.get("/posts", async (req, res) => {
                 }),
                 { expiresIn: 900 } // 900 seconds
             );
-            console.log(postObj.imageUrl);
+            // console.log(postObj.imageUrl);
             return postObj;
         }));
-        console.log(`Here are the postswithurls ---------*----------- ${postsWithUrls}`);
+        // console.log(`Here are the postswithurls ---------*----------- ${postsWithUrls}`);
 
         res.send(postsWithUrls);
     } catch (error) {

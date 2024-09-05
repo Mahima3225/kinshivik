@@ -4,9 +4,8 @@ import { useParams } from 'react-router-dom';
 import '../../styles/articleread.css';
 
 
-
-export default function ArticleRead(props) {
-
+export default function CategoryArticleView() {
+  
     const { id } = useParams();
     const [article, setArticle] = useState(null);
 
@@ -70,6 +69,3 @@ export default function ArticleRead(props) {
     </div>
   )
 }
-
-
-

@@ -16,6 +16,12 @@ import SubscriptionsPage from './components/subscriptions/SubscriptionsPage';
 import Library from './components/library/Library';
 import NewArticleView from './components/articles/NewArticleView';
 import ArticleRead from './components/articles/ArticleRead';
+// import Userprofile from './components/userprofile/Userprofile';
+import Userprofile from './components/userprofile/Userprofile';
+import Myprofile from './components/userprofile/Myprofile';
+// import IndividualCategory from './components/categories/IndividualCategory';
+import CategoryMainView from './components/categories/CategoryMainView';
+import CategoryArticles from './components/categories/CategoryArticles';
 
 export default function App() {
   return (
@@ -68,12 +74,25 @@ export default function App() {
         <Route path="/author/compose" element={<AuthorTools/>}/>
 
         <Route path="/author/myarticles" element={<AuthorTools/>}/>
-        <Route path="/myprofile" element={<AuthorTools/>}/>
+        {/* <Route path="/myprofile" element={<AuthorTools/>}/> */}
 
 
         <Route path="/post/:id" element={<ArticleRead/>}/>
 
         <Route path='/newview' element={<NewArticleView/>}/>
+
+        <Route path='/myprofile' element={<Myprofile/>}/>
+
+
+        <Route path='/categories' element={<CategoryPrincipal/>}/>
+
+
+        {/* <Route path='/category/:id/posts' element={<CategoryMainView/>}/> */}
+
+        <Route path='/category/:id/posts' element = {<CategoryArticles/>}/>
+
+
+        
 
         
 

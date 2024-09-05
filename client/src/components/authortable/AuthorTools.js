@@ -50,6 +50,7 @@ export default function AuthorTools() {
         
         if (response.ok) {
             const data = await response.json();
+            alert("post submitted");
             console.log('Success:', data);
         } else {
             console.error('Error:', response.statusText);
