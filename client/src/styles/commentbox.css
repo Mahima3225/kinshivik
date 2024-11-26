@@ -1,0 +1,41 @@
+#commentbox-main-container{
+    /* position: fixed; */
+    /* width: 100vw; */
+    max-width: 800px;
+    min-height: 50vh;
+    border-radius: 8px;
+    /* height: 100vh; */
+    margin: 0 auto;
+    background-color: rgb(12, 12, 12);
+    background-color: #db2c2c;
+    /* color: white; */
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left:20px ;
+    padding-right: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+#commentbox-comment-heading{
+    margin-bottom: 15px;
+    border-bottom-style: solid;
+    width: calc(100% - 40px);
+    
+    
+}
+#commentbox-write-comment-section{
+    margin-bottom: 10px;
+}
+
+#comment-content-textarea{
+    resize: none;
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(127, 88, 255);
+    border-bottom-width: 2px;
+    resize: none;
+    font-size: 16px;
+    min-height: 25vh;
+    width: 100%;
+}

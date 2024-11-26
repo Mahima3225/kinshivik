@@ -22,6 +22,9 @@ import Myprofile from './components/userprofile/Myprofile';
 // import IndividualCategory from './components/categories/IndividualCategory';
 import CategoryMainView from './components/categories/CategoryMainView';
 import CategoryArticles from './components/categories/CategoryArticles';
+import Commentbox from './components/commentbox/Commentbox';
+import SetMycookie from './components/cookies/SetMycookie';
+import Showmycookie from './components/cookies/Showmycookie';
 
 export default function App() {
   return (
@@ -57,7 +60,10 @@ export default function App() {
 
       <Routes>
 
-        <Route path="/" element={< Home/>} />
+        {/* <Route path="/" element={< Home/>} /> */}
+        <Route path="/" element={<Login showLogin={1} />} />
+
+
         <Route path="/home" element={< Home/>} />
 
 
@@ -79,6 +85,12 @@ export default function App() {
 
         <Route path="/post/:id" element={<ArticleRead/>}/>
 
+        {/* <Route path='/post/:id' element={<ArticleRead/>}>
+            <Route path='commentbox' element={<Commentbox/>}></Route>
+                
+        </Route> */}
+        {/* <Route path='/post/:id/commentbox' element={<><ArticleRead/><Commentbox/></>}></Route> */}
+
         <Route path='/newview' element={<NewArticleView/>}/>
 
         <Route path='/myprofile' element={<Myprofile/>}/>
@@ -90,6 +102,10 @@ export default function App() {
         {/* <Route path='/category/:id/posts' element={<CategoryMainView/>}/> */}
 
         <Route path='/category/:id/posts' element = {<CategoryArticles/>}/>
+
+
+        <Route path = '/setmycookies' element = {<SetMycookie/>}/>
+        <Route path= '/showmycookies' element={<Showmycookie/>}/>
 
 
         

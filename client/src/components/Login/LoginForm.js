@@ -29,6 +29,7 @@ export default function LoginForm() {
         try {
             const response = await fetch('http://127.0.0.1:9090/login', {
               method: 'POST',
+              credentials: 'include',
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -39,7 +40,16 @@ export default function LoginForm() {
             setPassword('');
             setEmail('');
             if(result.isValid === 'true'){
+
+                localStorage.setItem('userid', result.userid);
+                
+                
+                const storedValue = localStorage.getItem('userid');
+                 // Log the value to the console 
+                console.log('Stored Value:', storedValue);
+
                 navigate('/home');
+                //  console.log(document.cookie.userid);
 
             }
             else{

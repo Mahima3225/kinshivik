@@ -42,7 +42,7 @@ const postSchema = new mongoose.Schema(
       // required: true,
       unique: true,
     },
-    comments : [Comment.schema],
+    // comments : [Comment.schema],
     
     
   },

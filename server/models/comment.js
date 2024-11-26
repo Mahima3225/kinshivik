@@ -1,7 +1,4 @@
-
-
 const mongoose = require("mongoose");
-
 const commentSchema = new mongoose.Schema(
   {
 
@@ -31,6 +28,8 @@ const commentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Comment = mongoose.model('Comment', commentSchema);
-module.exports = Comment;
+// const Comment = mongoose.model('Comment', commentSchema);
+// module.exports = {Comment, commentSchema};
+module.exports = {commentSchema};
+
 

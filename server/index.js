@@ -23,6 +23,7 @@ const cors = require("cors");
 const User = require('./models/user');
 const Post = require('./models/articlepost');
 const Comment = require('./models/comment');
+const Commentbox = require('./models/commentBox');
 const Category = require("./models/categories");
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -43,7 +44,12 @@ dotenv.config();
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(cors({   
+
+    origin: 'http://localhost:3000', // Replace with  React app's URL
+    credentials: true
+  }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -107,8 +113,16 @@ app.post("/login",async(req,res,next)=>{
 
 
 
+
+
+
+
+
             res.cookie("accesskey",randomString);
-            res.cookie('userid',user.userid);
+            // res.cookie('userid',user.userid,{ sameSite: 'Lax' });
+            res.cookie('userid',user.userid,{ sameSite: 'None', secure: true});
+            
+            // res.cookie("kaushikcookiekey","kaushikcookievalue", { sameSite: 'Lax' });
             
             console.log(user.userid);
 
@@ -120,7 +134,7 @@ app.post("/login",async(req,res,next)=>{
 
 
             
-            res.json({isValid : 'true',userfound : 'false',})
+            res.json({isValid : 'true',userfound : 'false',userid : user.userid});
         }
         else {
             res.json({ isValid: 'false' });
@@ -167,10 +181,6 @@ app.get('/testauth',async (req,res)=>{
 });
 
 
-app.get('/mycook',(req,res)=>{
-    console.log(req.cookies);
-    res.send("Hello")
-});
 
 
 app.post("/users/add", async(req,res)=>{
@@ -552,7 +562,8 @@ app.get("/posts", async (req, res) => {
                 }),
                 { expiresIn: 900 } // 900 seconds
             );
-            // console.log(postObj.imageUrl);
+            // console.log(postObj.imageUrl);.
+
             return postObj;
         }));
         // console.log(`Here are the postswithurls ---------*----------- ${postsWithUrls}`);
@@ -608,7 +619,7 @@ app.get('/post/:id', async (req, res) => {
                 }),
                 { expiresIn: 900 } // 900 seconds
             );
-            console.log(postObj.imageUrl);
+            // console.log(postObj.imageUrl);
            
 
 
@@ -621,6 +632,175 @@ app.get('/post/:id', async (req, res) => {
         console.error(err);
         res.status(500).send("Error fetching post");
     }
+});
+
+// app.get("/post/:id/commentbox",async(req,res)=>{
+//     const commentboxid = "commentbox" + req.params.id;
+//     try{
+        
+//         const comments = await Commentbox.findOne({"commentboxid" : commentboxid});
+//         const commentsObj = comments.toObject();
+//         res.send(commentsObj);
+//         // res.send({"commentsarray": comments.commentsArray});
+//         console.log(commentsObj);
+
+//     }
+//     catch(error){
+//         console.error(error); 
+//         res.status(500).send({"error" :'Error fetching comments' });
+
+//     }
+    
+    
+    
+
+// })
+
+
+
+
+
+
+
+
+
+
+app.get("/post/:id/commentbox", async (req, res) => {
+    const commentBoxId = "commentbox" + req.params.id;
+    try {
+
+
+        
+
+        
+        const comments = await Commentbox.findOne({ "commentBoxid": commentBoxId }, 'commentsArray');
+        
+        if (!comments) {
+            return res.status(404).send({ "error": "CommentBox not found" });
+        }
+
+        const commentsObj = comments.toObject();
+        res.send(commentsObj);
+        console.log(commentsObj);
+        
+        // Alternatively, to send only commentsArray:
+        // res.send({ "commentsArray": comments.commentsArray });
+    } catch (error) {
+        console.error(error); 
+        res.status(500).send({ "error": "Error fetching comments" });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post("/post/:id/commentbox",async(req,res)=>{
+    const commentboxid = "commentbox" + req.params.id;
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    try{
+
+        console.log("Incoming comment content", req.body.content);
+        console.log("Incoming userId", req.body.userid);
+
+        const newcommentobject = { 
+            userId: req.body.userid,
+            numberOfLikes: req.body.numberOfLikes,
+            content: req.body.content, 
+            postId: req.body.postId,
+            commentId: commentboxid 
+        };
+
+        const result = await Commentbox.updateOne( { "commentBoxid": commentboxid },
+             { $push: { commentsArray: newcommentobject } },
+             { upsert: true } );
+        
+        
+        console.log("done commenting");
+        console.log(result);
+        const comments = await Commentbox.findOne({"commentBoxid" : commentboxid},'commentsArray');
+        // console.log(comments.commentsArray);
+
+        res.json({"sucess": "posted comment"});
+    
+    }
+    catch(error){
+        console.error(error); 
+        console.log('Error  commenting');
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+});
+
+
+
+app.get('/setmycook',(req,res)=>{
+    res.cookie("kaushikcookiekey","kaushikcookievalue", { sameSite: 'Lax' });
+    res.json({ message: 'Cookie set!' });
+});
+app.get('/showmycook',(req,res)=>{
+    console.log(req.cookies);
+    res.json(req.cookies);
 });
 
 

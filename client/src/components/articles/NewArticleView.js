@@ -30,7 +30,7 @@ export default function NewArticleView() {
                     <p>{post.description}</p>
                     <p>{post.content}</p>
                     <p><strong>Category:</strong> {post.category}</p>
-                    <p><strong>Created At:</strong> {new Date(post.createdAt).toLocaleString()}</p>
+                    <p><strong>Created At date:</strong> {new Date(post.createdAt).toLocaleString()}</p>
                 </div>
             ))}
     </div>
