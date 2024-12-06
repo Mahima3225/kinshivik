@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { useParams,Outlet, useNavigate, Link } from 'react-router-dom';
 import '../../styles/articleread.css';
 import Commentbox from '../commentbox/Commentbox';
+import ArticleShare from './ArticleShare';
 
 
 
@@ -167,7 +168,7 @@ export default function ArticleRead(props) {
 
 
 
-
+    <ArticleShare/>
 
 
 

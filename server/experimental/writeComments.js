@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Commentbox = require('./models/commentBox');
-const Comment = require('./models/comment');
+const Commentbox = require('../models/commentBox');
+const Comment = require('../models/comment');
 (async function (){
     try{
         await mongoose.connect('mongodb://127.0.0.1:27017/kinshivik');
@@ -32,6 +32,8 @@ async function commenthere(){
         const result = await Commentbox.updateOne( { "commentBoxid": commentboxid },
              { $push: { commentsArray: newcommentobject } },
              { upsert: true } );
+        
+
         
         
         console.log("done commenting");

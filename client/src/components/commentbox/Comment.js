@@ -6,10 +6,27 @@ import "../../styles/comment.css";
 function Comment({props}) {
 
   const commentid = props._id;
+  // const initiallikes = props.numberOfLikes;
+
+  const [numLikes,setLikes] = React.useState(props.numberOfLikes);
 
   const [isLiked,setIsLiked] = React.useState(0);
   function toggleLike(){
     setIsLiked(prevState => (prevState === 0 ? 1 : 0));
+
+    if(isLiked == 0){
+      // numLikes++;
+      setIsLiked(1);
+      setLikes((prev)=>prev++);
+
+
+    }
+    else if(isLiked == 1){
+      // numLikes--;
+      setLikes((prev)=>prev--);
+
+    }
+    // setIsLiked(prevState => (prevState === 0 ? 1 : 0));
     console.log(commentid);
      
   }
@@ -29,7 +46,8 @@ function Comment({props}) {
 
 
             </div>
-            <div id="comment-likes">{props.numberOfLikes}</div>
+            {/* <div id="comment-likes">{props.numberOfLikes}</div> */}
+            <div id="comment-likes">{numLikes}</div>
         </div>
        
 

@@ -389,12 +389,15 @@ app.get('/category/:categoryId/posts', async (req, res) => {
         // const articles = await Post.find({ postId: { $in: categories.posts} });
         // res.send(articles);
 
-        const categories = await Category.find({ categoryId: categoryId }, { posts: 1 });
-
+        const categories = await Category.findOne({ categoryId: categoryId }, { posts: 1 });
+        console.log(categories);
         
-        const postIds = categories.flatMap(category => category.posts);
-
-        
+        // const postIds = categories.flatMap(category => category.posts);
+        // const postIds = categories.map(category => category.posts);
+        const postIds = categories.posts;
+        console.log("\n---------*----------\n");
+        console.log(postIds);
+        console.log("\n---------*----------\n");
         const articles = await Post.find({ postId: { $in: postIds } });
 
         const postsWithUrls = await Promise.all(articles.map(async (post) => {
