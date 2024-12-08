@@ -70,12 +70,12 @@ export default function ArticleRead(props) {
   
           
 
-          const formData = {
+        const formData = {
             userid: localStorage.getItem('userid'),
             numberOfLikes: 0,
             content: commentcontent,
             postId: id,
-            commentId: "commentbox" + id 
+            commentBoxId: "commentbox" + id 
         };
           
   

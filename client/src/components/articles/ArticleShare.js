@@ -56,22 +56,22 @@ function ArticleShare() {
         <div id="share-buttons">
 
             {/* <!-- facebook --> */}
-            <a class="facebook" target="blank"><i class="fab fa-facebook"></i></a>
+            <a className="facebook" target="blank"><i className="fab fa-facebook"></i></a>
             
             {/* <!-- twitter --> */}
-            <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
+            <a className="twitter" target="blank"><i className="fab fa-twitter"></i></a>
             
             {/* <!-- linkedin --> */}
-            <a class="linkedin" target="blank"><i class="fab fa-linkedin"></i></a>
+            <a className="linkedin" target="blank"><i className="fab fa-linkedin"></i></a>
             
             {/* <!-- reddit --> */}
-            <a class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
+            <a className="reddit" target="blank"><i className="fab fa-reddit"></i></a>
         
             {/* <!-- whatsapp--> */}
-            <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
+            <a className="whatsapp" target="blank"><i className="fab fa-whatsapp"></i></a>
         
             {/* <!-- telegram--> */}
-            <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
+            <a className="telegram" target="blank"><i className="fab fa-telegram"></i></a>
         
         </div>
     </div>

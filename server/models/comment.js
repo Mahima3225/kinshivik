@@ -14,6 +14,10 @@ const commentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    commentBoxId:{
+      type: String,
+      required : true,
+    },
     commentId:{
       type: String,
       required: true,

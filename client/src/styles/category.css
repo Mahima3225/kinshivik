@@ -6,6 +6,7 @@
     left: calc(18vw + 20px);
     /* background-color: blueviolet; */
     padding-left: 20px;
+    padding-right: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -15,6 +16,13 @@
     border-left-style: solid ;
     border-left-width:  4px;
     border-left-color: rgb(127, 88, 255);
+
+}
+#Category-Header-create-btn-container{
+    margin-left: auto;
+
+}
+#Category-Header-create-btn{
 
 }
 
@@ -56,11 +64,14 @@
 
 }
 .individual-category-header-image{
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     border-style: solid;
     border-color: transparent;
     border-radius: 50%;
+    object-fit: cover; /* This ensures the image covers the container while maintaining aspect ratio */
+    object-position: center; /* Center the image within the container */ 
+    
 
 }
 .individual-category-header-name-container{

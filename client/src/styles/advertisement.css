@@ -1,0 +1,206 @@
+#advertisement-header{
+    width: 100%;
+    background-color: #fCEEEA;
+    height: 12vh;
+    
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+
+    padding: 15px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color:rgb(226, 85, 85);
+
+
+}
+#ads-manager-title{
+    font-family: 'Times New Roman',Times,serif;
+    letter-spacing: 2px;
+    
+    font-size: 20px;
+
+
+}
+#ad-credits-btn-container{
+    width : 180px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+#ad-credits-btn{
+    width: 80%;
+    height: 30px;
+    background-color: #EBFDE7 ;
+    color: black;
+    border: solid;
+    border-color: rgb(102, 180, 102);
+    border-radius: 5px;
+}
+#advertisement-main-body{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 88vh;
+    
+    background-color: #ececf0;
+}
+#advertisement-creator-container{
+    width : 50%;
+    
+    overflow: scroll; /* Hide scrollbar for Chrome, Safari, and Opera */ 
+    -ms-overflow-style: none; /* IE and Edge */ 
+    scrollbar-width: none; /* Firefox */
+    background-color: #ececf0;
+    padding-top:40px;
+    padding-left:6.25%;
+    padding-right: 6.25%;
+    padding-bottom:80px;
+    
+
+}
+#advertisement-creator-container::-webkit-scrollbar {
+     display: none; /* Chrome, Safari, and Opera */ 
+}
+#advertisement-creator-form-container{
+    background-color: #ffffff;
+    min-height: 100vh;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-right: 15px ;
+    padding-bottom: 20px;
+
+}
+#advertisement-create-ad-heading{
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #1A282D;
+    font-size: 18px;
+}
+#advertisement-creator-img-select-input-label{
+    font-size: 12px;
+    font-weight: 700;
+}
+.ad-creator-label-container{
+    margin-top: 15px;
+}
+.ad-creator-label{
+    font-size: 12px;
+    font-weight: 700;
+    color: #536168;
+
+}
+#ad-creator-img-input-and-display-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#advertisement-creator-img-selected{
+    /* width: 100px; */
+    /* max-height: 100px; */
+    /* width: 75%; */
+    /* margin-left: auto; */
+}
+#chosen-image-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    width: 50%;
+}
+#advertisement-creator-title-select-input{
+    resize: vertical;
+    width: 100%;
+    min-height: 25vh;
+}
+#advertisement-creator-url-select-input{
+    width: 100%;
+    height: 30px;
+}
+#advertisement-creator-call-to-action-select-input{
+    width: 100%;
+    height: 30px;
+}
+#advertisement-creator-category-selector{
+    width: 100%;
+    height: 30px;
+}
+#advertisement-creator-budget-selector{
+    width: 100%;
+    height: 30px;
+
+}
+#ad-submit-publish-button-container{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+
+}
+#ad-submit-publish-button{
+    background-color:#E20753 ;
+    color: white;
+    font-size: 14px;
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 4px;
+    border-style: solid;
+    border-color: #E20753;
+}
+#advertisement-preview-container{
+    background-color: #ececf0;
+    width: 50%;
+    padding-top:40px;
+    padding-left:6.25%;
+    padding-right: 6.25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+#advertisement-preview-sub-container{
+    background-color: white;
+    padding-top: 20px;
+    min-height: 50vh;
+    width: 87.5vh;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    
+    padding-right: 15px ;
+    padding-bottom: 20px ;
+    
+}
+#advertisement-preview-ad-heading{
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #1A282D;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+#advertisement-preview-ad-title-container{
+    width: 100%;
+    margin-bottom:15px ;
+
+}
+#advertisement-preview-ad-image-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+
+}
+#advertisement-creator-img-selected{
+    max-width: 100%;
+}

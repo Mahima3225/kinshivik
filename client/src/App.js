@@ -26,6 +26,8 @@ import Commentbox from './components/commentbox/Commentbox';
 import SetMycookie from './components/cookies/SetMycookie';
 import Showmycookie from './components/cookies/Showmycookie';
 import ArticleShare from './components/articles/ArticleShare';
+import Advertisement from './components/adSales/Advertisement';
+import CreateCategory from './components/categories/CreateCategory';
 
 export default function App() {
   return (
@@ -109,6 +111,9 @@ export default function App() {
         <Route path= '/showmycookies' element={<Showmycookie/>}/>
 
         <Route path= '/articleshare' element={<ArticleShare/>}/>
+        <Route path = '/createcategory' element={<CreateCategory/>}/>
+
+        <Route path= '/adkinshivik' element = {<Advertisement/>}/>
 
 
         

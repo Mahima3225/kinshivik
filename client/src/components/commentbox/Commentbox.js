@@ -91,7 +91,8 @@ function Commentbox() {
            {comments.map((comment, index) => ( <div key={index}>{comment.content}</div> ))} 
         </div> */}
         <div>
-           {comments.map((comment, index) => ( <Comment key={index} props={comment}/> ))} 
+           {/* {comments.map((comment, index) => ( <Comment key={index} props={comment}/> ))}  */}
+           {comments.map((comment) => ( <Comment key={comment.commentId} props={comment}/> ))} 
         </div>
         
        

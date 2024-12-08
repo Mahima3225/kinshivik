@@ -370,12 +370,42 @@ app.get("/article/get/:slug",async(req,res)=>{
 
 
 app.get('/categories',async(req,res)=>{
+    // try {
+    //     const categories = await Category.find({});
+    //     res.json(categories);
+    // } catch (err) {
+    //     console.error(err);
+    //     res.status(500).send('Error fetching Categories');
+    // }
     try {
-        const categories = await Category.find({});
-        res.json(categories);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error fetching Categories');
+        const categories = await Category.find().sort({ created: -1 });
+
+        // Generate signed URLs in parallel
+        const categoriesWithUrls = await Promise.all(categories.map(async (category) => {
+
+            const categoryObj = category.toObject();
+
+
+
+
+            categoryObj.image = await getSignedUrl(
+                s3Client,
+                new GetObjectCommand({
+                    Bucket: bucketName,
+                    Key: category.image
+                }),
+                { expiresIn: 900 } // 900 seconds
+            );
+            // console.log(postObj.imageUrl);.
+
+            return categoryObj;
+        }));
+        // console.log(`Here are the postswithurls ---------*----------- ${postsWithUrls}`);
+
+        res.send(categoriesWithUrls);
+    } catch (error) {
+        console.error('Error fetching Categories:', error);
+        res.status(500).send({ error: 'Error fetching Categories' });
     }
 
 });
@@ -541,10 +571,6 @@ app.post("/article/create", upload.single('image'), async (req, res) => {
 });
 
 
-
-
-
-
 app.get("/posts", async (req, res) => {
     try {
         const posts = await Post.find().sort({ created: -1 });
@@ -661,13 +687,6 @@ app.get('/post/:id', async (req, res) => {
 
 
 
-
-
-
-
-
-
-
 app.get("/post/:id/commentbox", async (req, res) => {
     const commentBoxId = "commentbox" + req.params.id;
     try {
@@ -696,38 +715,6 @@ app.get("/post/:id/commentbox", async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.post("/post/:id/commentbox",async(req,res)=>{
     const commentboxid = "commentbox" + req.params.id;
 
@@ -751,13 +738,15 @@ app.post("/post/:id/commentbox",async(req,res)=>{
 
         console.log("Incoming comment content", req.body.content);
         console.log("Incoming userId", req.body.userid);
+        const slicedcommentboxid = commentboxid.slice(8,15);
+        const randomCommentId = crypto.randomBytes(16).toString('hex').slice(0, 16) + slicedcommentboxid;
 
         const newcommentobject = { 
             userId: req.body.userid,
             numberOfLikes: req.body.numberOfLikes,
             content: req.body.content, 
             postId: req.body.postId,
-            commentId: commentboxid 
+            commentId: randomCommentId, 
         };
 
         const result = await Commentbox.updateOne( { "commentBoxid": commentboxid },
@@ -807,6 +796,68 @@ app.get('/showmycook',(req,res)=>{
 });
 
 
+app.post("/categories/add",upload.single('image'), async(req,res)=>{
+    const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
+
+    try{
+        const file = req.file;
+        if (!file) {
+            return res.status(400).send("No file uploaded");
+        }
+
+        const title = req.body.title;
+        const description = req.body.description;
+        const slug = slugify(title, { lower: true, strict: true });
+        if (!slug) {
+            return res.status(401).send("Slug cannot be null");
+        }
+
+        const existingPost = await Category.findOne({ slug });
+        if (existingPost) {
+            slug = `${slug}${generateFileName()}`
+            res.status(400).send("Space with this title already exists");
+        }
+        const fileBuffer = file.buffer;
+        const fileName = `category-${title}-${generateFileName()}`;
+
+
+        const generateFileName2 = (bytes = 8) => crypto.randomBytes(bytes).toString('hex');
+
+
+        const categoryId = `cagrid-${title}-${generateFileName2()}` 
+        
+
+        const uploadParams = {
+            Bucket: bucketName,
+            Body: fileBuffer,
+            Key: fileName,
+            ContentType: file.mimetype
+        };
+
+        await s3Client.send(new PutObjectCommand(uploadParams));
+
+        const post = await Category.insertMany([{
+            image: fileName,
+            title: title,
+            description: description,
+            categoryId : categoryId,
+            slug: slug,
+        }]);
+
+        res.send(post);
+
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).send("Error creating category");
+
+    }
+
+
+
+})
+
+
 
 app.post("/categories/add/:category",async(req,res)=>{
     const data = [
@@ -819,10 +870,7 @@ app.post("/categories/add/:category",async(req,res)=>{
                 "post4a-work-begins-on-german-military-base-near-russian-border",
                 
             ],
-            
-
-
-           
+        
         },
         {
             "categoryId": "category2d" ,
@@ -833,17 +881,9 @@ app.post("/categories/add/:category",async(req,res)=>{
                 "post3a-Morgan-Stanley-chairman-missing-after-yacht-sinking",
                
             ],
-            
-
-            
+         
         },
     
-        
-        
-    
-    
-
-
     ];
 
     try {
