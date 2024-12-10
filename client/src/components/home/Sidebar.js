@@ -4,6 +4,7 @@ import home from '../../assets/home-svgrepo-com.svg';
 import subscriptions from '../../assets/user-following-svgrepo-com.svg';
 import categories from '../../assets/collapse-categories-svgrepo-com.svg';
 import library from '../../assets/library-add-svgrepo-com.svg';
+import megaphone from "../../assets/megaphone-advertising-svgrepo-com.svg";
 
 
 export default function Sidebar() {
@@ -24,7 +25,7 @@ export default function Sidebar() {
       </div>
 
 
-      <div id="subscriptions-icon-sidebar-link-container">
+      {/* <div id="subscriptions-icon-sidebar-link-container">
         <Link to="/Subscriptions" id="subscriptions-icon-link">
           <div id = "subscriptions-icon-and-title-container">
             <div>
@@ -35,7 +36,7 @@ export default function Sidebar() {
             </div>
           </div>
         </Link>
-      </div>
+      </div> */}
       
 
       
@@ -46,7 +47,7 @@ export default function Sidebar() {
               <img id="categories-icon-sidebar" src={categories}/>
             </div>
             <div>
-              Categories
+              Spaces
             </div>
           </div>
         </Link>
@@ -61,6 +62,20 @@ export default function Sidebar() {
             </div>
             <div>
                 Library
+            </div>
+          </div>
+        </Link>
+     </div>
+
+
+     <div id="advertising-icon-sidebar-link-container">
+        <Link to="/adkinshivik" id="advertising-icon-link">
+          <div id = "advertising-icon-and-title-container">
+            <div>
+              <img id="advertising-icon-sidebar" src={megaphone}/>
+            </div>
+            <div>
+                Advertise
             </div>
           </div>
         </Link>

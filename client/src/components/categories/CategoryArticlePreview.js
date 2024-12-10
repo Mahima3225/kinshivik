@@ -2,39 +2,39 @@
 import React from 'react';
 import { Route, Routes, Link } from "react-router-dom";
 
-
+import "../../styles/categoryarticles.css";
 
 export default function CategoryArticlePreview({props}) {
   return (
-    <div className="home-main-article-main-link-container">
+    <div className="category-article-main-link-container">
 
     
-        <Link className="home-main-article-link" to= {`/post/${props.postId}`}>
+        <Link className="category-main-article-link" to= {`/post/${props.postId}`}>
 
         
-        <div className="home-main-article-main-container">
-            <div className="home-main-article-header">
+        <div className="category-article-main-container">
+            <div className="category-article-header">
 
                 {/* profile picture container */}
-                <div className="home-main-article-header-profile-photo-container">
-                    <img className="home-main-article-header-profile-photo" src={require('../../assets/il_570xN.5374292412_49r5.avif')}/>
+                <div className="category-article-header-profile-photo-container">
+                    <img className="category-article-header-profile-photo" src={require('../../assets/il_570xN.5374292412_49r5.avif')}/>
                     {/* <img src={require(`${props.obj.headerdata.profilepicture}`)}/> */}
                 </div>
 
-                <div className="home-main-article-header-name-container">
+                <div className="category-article-header-name-container">
                     {props.postId}
 
 
                 </div>
 
             </div>
-            <div className="home-main-article-body">
-                <div className="home-main-article-thumbnail-image-container">
+            <div className="category-article-body">
+                <div className="category-article-thumbnail-image-container">
                     
-                    <img className="home-main-article-thumbnail-image" src={props.imageUrl}/>
+                    <img className="category-article-thumbnail-image" src={props.imageUrl}/>
 
                 </div>
-                <div className="home-article-preview-title-container">
+                <div className="category-preview-title-container">
                     {/* {props.mainarticlemeta.articletitle} */}
                     {props.title}
 {/* 
@@ -49,7 +49,7 @@ export default function CategoryArticlePreview({props}) {
                     this is a title i want you to show */}
 
                 </div>
-                <div className="home-main-article-description-container">
+                <div className="category-article-description-container">
                     {props.description}
                 
                     
@@ -59,12 +59,12 @@ export default function CategoryArticlePreview({props}) {
             </div>
             
 
-        <div className="article-preview-metadata-container">
-                <div className="article-preview-metadata-views">
+        <div className="category-article-preview-metadata-container">
+                <div className="category-article-preview-metadata-views">
                     1565 views
 
                 </div>
-                <div className="article-preview-metadata-date">
+                <div className="category-article-preview-metadata-date">
                     {/* {props.createdAt} */}
                     {new Date(props.createdAt).toLocaleString()}
 

@@ -1,0 +1,180 @@
+
+*{
+    box-sizing: border-box;
+}
+
+
+
+
+/* {---*---*---*---*---*---*CategoryMain*------*---*---*---*---} */
+
+#category-main-container{
+    
+    /* margin-top: 2vh; */
+    padding-top: 11vh;
+    display: flex;
+    justify-content: left;
+    /* background-color: black; */
+    /* width: 80.7vw; */
+    width: 100%;
+    flex-wrap: wrap;
+    padding-left: 5%;
+    background-color: #121227ea;
+}
+.category-article-main-link-container{
+    width: 60%;
+    margin-bottom: 25px;
+    border-bottom-style: solid ;
+    border-bottom-width: 2px;
+    padding-bottom: 20px;
+    border-bottom-color: #7f58ff;
+    text-decoration: none;
+    /* background-color: aliceblue; */
+    background-color: #0c101C;
+    color: white;
+
+}
+.category-main-article-link{
+    text-decoration: none;
+}
+.category-article-main-container{
+    width: 100%;
+    margin-bottom: 25px;
+    /* border-bottom-style: solid ;
+    border-bottom-width: 2px;
+    padding-bottom: 20px;
+    border-bottom-color: rgb(151, 156, 156); */
+    
+    
+
+}
+.category-article-header{
+    width: 100%;
+    height: 8vh;
+    min-height: 50px;
+    /* background-color: aquamarine; */
+    /* margin-bottom: 10px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10px;
+    /* border-bottom-style: solid; */
+    /* border-bottom-width: 1px; */
+    /* margin-bottom: 2px; */
+    /* border-bottom-color: rgb(127, 88, 255) ; */
+
+}
+.category-article-header-profile-photo-container{
+    height: 100%;
+    margin-right: 15px;
+    
+
+}
+.category-article-header-profile-photo{
+    max-height: 100%;
+    max-width: 100%;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 50%;
+
+}
+.category-article-header-name-container{
+    text-decoration: none;
+    /* color: black; */
+    color: #ffffff
+
+}
+.category-article-body{
+    width: 100%;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+
+}
+.category-article-thumbnail-image-container{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: azure;
+
+}
+.category-article-thumbnail-image{
+    max-width: 100%;
+    max-height: 100%;
+
+}
+.category-preview-title-container{
+    /* background-color: greenyellow; */
+    width: 100%;
+    max-height: 20vh;
+    display: -webkit-box;        /* Use WebKit's box model */
+    -webkit-box-orient: vertical; /* Set the box orientation to vertical */
+    -webkit-line-clamp: 2;       /* Show only 5 lines */
+    overflow: hidden;            /* Hide the overflowing text */
+    text-overflow: ellipsis; 
+    text-decoration: none;
+
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    /* color: black; */
+    font-size: large;
+    color: #ffffff;
+}
+.category-article-description-container{
+    width: 100%;
+    /* height: 20vh; */
+    max-height: 20vh;
+    /* margin-top: 10px; */
+    text-decoration: none;
+    /* text-overflow: clip; */
+    /* text-overflow: ellipsis; */
+    /* background-color: yellow; */
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+    /* padding-bottom: 10px; */
+
+    /* white-space: nowrap;  */
+    /* overflow: hidden;     */
+    
+    display: -webkit-box;        /* Use WebKit's box model */
+    -webkit-box-orient: vertical; /* Set the box orientation to vertical */
+    -webkit-line-clamp: 5;       /* Show only 5 lines */
+    overflow: hidden;            /* Hide the overflowing text */
+    text-overflow: ellipsis;     /* Show ellipsis (...) for overflow */
+    border-left-style: solid;
+    border-width: 4px;
+    border-left-color: rgb(127, 88, 255);
+    color: white;
+
+}
+
+.category-article-preview-metadata-container{
+    /* background-color: aqua; */
+    display: flex;
+    height: 40px;
+    flex-direction: row;
+    /* padding-top: 5px; */
+    padding-left: 13px;
+    align-items: center;
+
+}
+.category-article-preview-metadata-views{
+
+}
+.category-article-preview-metadata-date{
+    margin-right: 10px;
+    margin-left: auto;
+
+}

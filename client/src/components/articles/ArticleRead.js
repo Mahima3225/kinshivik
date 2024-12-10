@@ -4,6 +4,8 @@ import { useParams,Outlet, useNavigate, Link } from 'react-router-dom';
 import '../../styles/articleread.css';
 import Commentbox from '../commentbox/Commentbox';
 import ArticleShare from './ArticleShare';
+import ArticleForward from './ArticleForward';
+import Forward from "../../assets/forward-svgrepo-com.svg"
 
 
 
@@ -15,13 +17,54 @@ export default function ArticleRead(props) {
     const [article, setArticle] = useState(null);
     const [showCommentbox,setShowCommentBox] = useState(0);
     const [commentcontent, setCommentContent] = React.useState(" ");
+    const [showForwardModal, setShowForwardModel] = React.useState(0);
     const navigate = useNavigate();
+
+     
+    const [selectedCategory,setSelectedCategory] = React.useState("");
+
+    
     
     const toggleCommentBox = () => {
         console.log("toggled");
         setShowCommentBox(prevState => (prevState === 0 ? 1 : 0));
         //  navigate("commentbox");
     };
+    const toggleForwardModal = () => {
+        console.log("toggled");
+        setShowForwardModel(prevState => (prevState === 0 ? 1 : 0));
+        //  navigate("commentbox");
+    };
+    const propsforwardmodel = {
+        showForwardModal: showForwardModal,
+        toggleForwardModal : toggleForwardModal,
+        setSelectedCategory : setSelectedCategory,
+    }
+
+
+
+    useEffect(() => {
+        // Fetch the article using the id
+        const addToCategory = async () => {
+            try {
+                if(selectedCategory !== ""){
+
+                
+                    const response = await 
+                    fetch(`http://localhost:9090/category/${selectedCategory}/add/${id}`);
+                    const data = await response.json();
+                    console.log(data);
+                    if(data.Success === "true"){
+                        alert("Sucessfully added to space");
+                    }
+                }
+            } catch (error) {
+                console.error('Error adding to space', error);
+            }
+        };
+
+        addToCategory();
+    }, [selectedCategory]);
 
 
 
@@ -124,7 +167,7 @@ export default function ArticleRead(props) {
     }
 
   return (
-    <>
+    <div id="article-reading-view-whole-super-container">
     
     
     
@@ -141,9 +184,20 @@ export default function ArticleRead(props) {
 
         </div>
 
-        <div id="metadata-article">
-            <p><strong>Category:</strong> {article.category}</p>
-            <p><strong>Created on:</strong> {new Date(article.createdAt).toLocaleString()}</p>
+        <div id="metadata-forward-button-article-container">
+
+            <div id="metadata-article-container">
+                <p><strong>Category:</strong> {article.category}</p>
+                <p><strong>Published on:</strong> {new Date(article.createdAt).toLocaleString()}</p>
+
+            </div>
+            
+
+            <div id="forward-button-container">
+                <button id="forward-button" onClick={toggleForwardModal}>
+                    <img id="forward-button-svg" src={Forward}/>
+                </button> 
+            </div>
         </div>
 
         
@@ -165,6 +219,9 @@ export default function ArticleRead(props) {
 
 
     </div>
+
+
+    {showForwardModal===1 && <ArticleForward {...propsforwardmodel}/>}
 
 
 
@@ -231,7 +288,7 @@ export default function ArticleRead(props) {
 
     {/* {showCommentbox === 1 && <Outlet context={showCommentbox}/>} */}
     {showCommentbox === 1 && <Commentbox/>}
-    </>
+    </div>
   )
 }
 

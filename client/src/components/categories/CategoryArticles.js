@@ -4,6 +4,9 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import CategoryArticlePreview from './CategoryArticlePreview';
 import { useParams } from 'react-router-dom';
+import "../../styles/categoryarticles.css";
+import CategoryAdvertisementContainer from './CategoryAdvertisementContainer';
+import CategorySideSection from './CategorySideSection';
 
 // import array1 from '../../sampledata.js/data1';
 // export default function CategoryArticles({props}) {
@@ -21,7 +24,8 @@ import { useParams } from 'react-router-dom';
     fetchPosts();
   }, []);
   return (
-    <div id="homemain-container">
+    <div id="category-main-container">
+      
       {posts.map((post) => (
                 <CategoryArticlePreview key = {post._id} props={post} />
       ))}
@@ -30,6 +34,14 @@ import { useParams } from 'react-router-dom';
       {/* <HomeMainArticle {...array1[0]}/> */}
 
       {/* <HomeMainArticle {...array1[0]}/> */}
+
+
+      <CategorySideSection/>
+
+
+      <CategoryAdvertisementContainer/>
+
+
 
 
 

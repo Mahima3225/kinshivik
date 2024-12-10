@@ -22,4 +22,4 @@ function AdvertisementPreview(props) {
   )
 }
 
-export default AdvertisementPreview
+export default AdvertisementPreview;

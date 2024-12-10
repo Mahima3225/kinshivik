@@ -25,6 +25,7 @@ const Post = require('./models/articlepost');
 const Comment = require('./models/comment');
 const Commentbox = require('./models/commentBox');
 const Category = require("./models/categories");
+const Advertisement = require("./models/advertisement");
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const slugify = require('slugify');
@@ -410,6 +411,234 @@ app.get('/categories',async(req,res)=>{
 
 });
 
+app.get('/category/:categoryId/add/:postid',async(req,res) => {
+    const postId = req.params.postid;
+    const categoryId = req.params.categoryId;
+
+    try{
+        const result = await Category.updateOne( 
+            { 
+              categoryId: categoryId  // Filter by document id
+            },
+            //{ $push: { posts: postId } } // Push new item into the array 
+            { $addToSet: { posts: postId } },
+        );
+      console.log(result);
+      res.json({
+          "Success" : "true",
+      })
+
+    }
+    catch(err){
+        console.log(err);
+        res.json({
+            "Success" : "false",
+
+        })
+
+    }
+    
+})
+
+
+app.get('/category/:categoryId/about',async(req,res) => {
+    const categoryId = req.params.categoryId;
+    try {
+        const category = await Category.findOne({ categoryId: categoryId }, {posts : 0});
+        // console.log(category);
+        const categoryObj = category.toObject();
+
+        
+
+        categoryObj.imageUrl = await getSignedUrl(
+            s3Client,
+            new GetObjectCommand({
+                Bucket: bucketName,
+                Key: category.image
+            }),
+            { expiresIn: 900 } // 900 seconds
+        );
+
+
+        res.send(categoryObj);
+
+        
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error fetching category about');
+    }
+
+})
+
+
+
+
+
+
+
+
+
+
+app.get('/category/:categoryId/ad', async (req,res)=>{
+    const categoryId = req.params.categoryId;
+    console.log(req.params.categoryId);
+    
+
+    try {
+        const ad = await Advertisement.findOne({categoryIdAd: categoryId });
+        console.log(ad);
+        if (!ad) {
+            return res.status(404).json({"failure" : "No Ads 😊"});
+        }
+
+
+
+
+        const adObj = ad.toObject();
+
+
+
+
+        adObj.imageUrl = await getSignedUrl(
+            s3Client,
+            new GetObjectCommand({
+                Bucket: bucketName,
+                Key: ad.image
+            }),
+            { expiresIn: 900 } // 900 seconds
+        );
+            
+           
+
+
+
+
+
+
+        res.send(adObj);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error fetching Ads");
+    }
+
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post('/advertise/category',upload.single('image'), async(req,res)=>{
+
+
+    
+    const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
+
+    try{
+        const file = req.file;
+        if (!file) {
+            return res.status(400).send("No file uploaded");
+        }
+
+        const title = req.body.title;
+        const budget = req.body.budget;
+        const url = req.body.url;
+        const categoryIdAd = req.body.categoryIdAd;
+        
+        
+        
+        const fileBuffer = file.buffer;
+        let fileName = `adimage-${title.substring(0,15)}-${generateFileName()}`;
+        fileName = fileName.replace(/\s+/g, '');
+
+
+
+        const generateFileName2 = (bytes = 8) => crypto.randomBytes(bytes).toString('hex');
+
+
+        let adId = `adid-${title.substring(0,15)}-${generateFileName2()}` ;
+        
+        adId = adId.replace(/\s+/g, '');
+
+        const uploadParams = {
+            Bucket: bucketName,
+            Body: fileBuffer,
+            Key: fileName,
+            ContentType: file.mimetype
+        };
+
+        await s3Client.send(new PutObjectCommand(uploadParams));
+
+        const post = await Advertisement.insertMany([{
+            image: fileName,
+            title: title,
+            budget: budget,
+            url : url,
+            categoryIdAd : categoryIdAd,
+            
+            adId : adId,
+            
+            
+        }]);
+
+        res.send(post);
+
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).send("Error creating ad");
+
+    }
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('/category/:categoryId/posts', async (req, res) => {
     const categoryId = req.params.categoryId;
 
@@ -420,15 +649,22 @@ app.get('/category/:categoryId/posts', async (req, res) => {
         // res.send(articles);
 
         const categories = await Category.findOne({ categoryId: categoryId }, { posts: 1 });
-        console.log(categories);
+        // console.log(categories);
         
         // const postIds = categories.flatMap(category => category.posts);
         // const postIds = categories.map(category => category.posts);
         const postIds = categories.posts;
-        console.log("\n---------*----------\n");
-        console.log(postIds);
-        console.log("\n---------*----------\n");
-        const articles = await Post.find({ postId: { $in: postIds } });
+        // console.log("\n---------*----------\n");
+        // console.log(postIds);
+        // console.log("\n---------*----------\n");
+        const articles = await Post.find({
+             postId: { $in: postIds } 
+            },
+            {
+                content: 0,
+                comments : 0
+            }
+        );
 
         const postsWithUrls = await Promise.all(articles.map(async (post) => {
 
@@ -458,6 +694,9 @@ app.get('/category/:categoryId/posts', async (req, res) => {
         res.status(500).send('Error fetching categories');
     }
 });
+
+
+
 
 
 

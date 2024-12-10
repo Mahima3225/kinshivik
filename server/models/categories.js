@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose');
-const Post = require('./articlepost');
+// const Post = require('./articlepost');
 const categorySchema = new mongoose.Schema(
     {
       categoryId: {
@@ -30,9 +30,22 @@ const categorySchema = new mongoose.Schema(
       },
 
       //slug-strings
-      posts:[String],
+      // posts:[String],
+      posts: {
+        type: [String], 
+        set: function (posts) { 
+          // Ensure uniqueness 
+          return Array.from(new Set(posts));
+        } 
+      }
     },
     { timestamps: true }
+  );
+
+  categorySchema.pre('save', function (next) {
+     this.posts = Array.from(new Set(this.posts)); 
+     next(); 
+    }
   );
   
   const Category = mongoose.model('Category', categorySchema);

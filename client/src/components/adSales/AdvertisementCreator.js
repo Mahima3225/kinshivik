@@ -2,10 +2,71 @@ import React from 'react';
 import "../../styles/advertisement.css";
 
 function AdvertisementCreator(props) {
+
+
+  const [file, setFile] = React.useState(null);
+  const [title, setTitle] = React.useState(null);
+  const [budget, setBudget] = React.useState(null);
+  const [url, setUrl] = React.useState(null);
+  const [categoryIdAd, setCategoryIdAd] = React.useState(null);
+
+  function onChangeTitle(event){
+    props.handleTitleChange(event);
+    setTitle(event.target.value);
+
+  }
+  function onChangeBudget(event){
+    setBudget(event.target.value);
+
+  }
+  function onChangeUrl(event){
+    setUrl(event.target.value);
+
+  }
+  function onChangeCategoryIdAd(event){
+    setCategoryIdAd(event.target.value);
+
+  }
+  function onChangeImageFile(event){
+    const file = event.target.files[0];
+    setFile(file);
+    props.handleImageChange(event);
+    
+  }
+
+  const submit = async (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("title", title);
+    formData.append("budget", budget);
+    formData.append("url", url);
+    formData.append("categoryIdAd", categoryIdAd);
+    
+    
+    
+    const response = await fetch('http://127.0.0.1:9090/advertise/category', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            
+        }
+    });
+    
+    if (response.ok) {
+        const data = await response.json();
+        alert("Advertisement published");
+        console.log('Success:', data);
+    } else {
+        console.error('Error:', response.statusText);
+        alert("Uh oh something went wrong");
+    }
+
+}
   return (
     <div id="advertisement-creator-container">
         <div id="advertisement-creator-form-container">
-            <form>
+            <form onSubmit={submit}>
               <div id="advertisement-create-ad-heading">Create Ad </div>
               <div class="ad-creator-label-container">
                 <label for = "advertisement-creator-img-select-input" id="advertisement-creator-img-select-input-label" class="ad-creator-label">
@@ -14,7 +75,7 @@ function AdvertisementCreator(props) {
               </div>
               <div id="ad-creator-img-input-and-display-container">
                 <div>
-                  <input id = "advertisement-creator-img-select-input" type="file" onChange={props.handleImageChange}/>
+                  <input id = "advertisement-creator-img-select-input" type="file" onChange={onChangeImageFile}/>
                 </div>
                 <div id="chosen-image-container">
                   <img id="advertisement-creator-img-selected" src={props.selectedImage} alt="Selected" />
@@ -32,7 +93,7 @@ function AdvertisementCreator(props) {
               </div>
               <div>
                 <textarea id = "advertisement-creator-title-select-input"
-                type="text" onChange={props.handleTitleChange} placeholder='Write a compelling headline'/>
+                type="text"  placeholder='Write a compelling headline' onChange={onChangeTitle}/>
               </div>
               {/* <div>{props.selectedTitle}</div> */}
 
@@ -46,7 +107,7 @@ function AdvertisementCreator(props) {
 
               <div>
 
-                <input id = "advertisement-creator-url-select-input" type="text" placeholder='Enter the destination url'/>
+                <input id = "advertisement-creator-url-select-input" type="text" placeholder='Enter the destination url' onChange={onChangeUrl}/>
 
               </div>
 
@@ -85,12 +146,12 @@ function AdvertisementCreator(props) {
 
 
               <div class="ad-creator-label-container">
-                <label id="advertisement-creator-category-selector-label" for="advertisement-creator-category-selector" class="ad-creator-label">Enter categories seperated by comma</label>
+                <label id="advertisement-creator-category-selector-label" for="advertisement-creator-category-selector" class="ad-creator-label">Enter category id </label>
               </div>
 
 
               <div>
-                <input id="advertisement-creator-category-selector" type="text"></input>
+                <input onChange={onChangeCategoryIdAd} id="advertisement-creator-category-selector" type="text"></input>
               </div>
 
 
@@ -100,7 +161,7 @@ function AdvertisementCreator(props) {
 
 
               <div>
-                <input id="advertisement-creator-budget-selector" type="text"></input>
+                <input onChange={onChangeBudget} id="advertisement-creator-budget-selector" type="text"></input>
               </div>
 
               <div id="ad-submit-publish-button-container">
